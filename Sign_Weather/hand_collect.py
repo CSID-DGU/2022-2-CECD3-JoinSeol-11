@@ -41,6 +41,62 @@ class OpenPose():
         return all_hand_peaks
     
 if __name__ == "__main__":
+    flist=list()
+    modelpt='/pytorch-openpose/model' #모델 파일 위치
     
+    # 사용할 변수 생성
+    pose=OpenPose(modelpt)
+    arr = []
+    df = pd.DataFrame(columns=range(84))
+
+    #파일 Path 설정
+    base_path = '/AIHUB/WEATHER'
+    file_list = os.listdir(base_path)
+    file_list.sort()
+    print(file_list)
+    
+    for classPath in file_list:
+      vid_list = os.listdir(base_path+'/'+classPath)
+      vid_list.sort()
+      print('ClassPath: ' + classPath)
+      
+      for vid in vid_list:
+        vidcap = cv2.VideoCapture(base_path + '/' + classPath + '/' + vid)
+        label = int(classPath) #Label명 가져오기
+        count = 0
+        print('Video: ' + vid)
+
+        while(vidcap.isOpened()):
+            ret, image = vidcap.read()
+            if not ret:
+              break
+            # 이미지 사이즈 변경
+            #image = cv2.resize(image, (3024, 4032))
+
+            #영상 길이에 따라 이미지 추출 간격 조절
+            total_frame_count = vidcap.get(cv2.CAP_PROP_FRAME_COUNT)
+            frame = int(total_frame_count/20)
+
+            # n 프레임당 하나씩 이미지 추출
+            if(int(vidcap.get(1)) % frame == 0 and count < 20):
+
+                #hand detect
+                position = pose.handpt(image)
+
+                #shape 수정 및 frame, label 추가
+                out_arr = np.ravel(position, order='C') #1차원으로 만들기(0:84)
+                out_arr = np.append(out_arr, count) #84에 frame번호
+                out_arr = np.append(out_arr, label) #85에 label번호
+                
+                #데이터 한 줄로 만들고 dataframe 생성
+                out_arr = out_arr.reshape(1,86)
+                out_df = pd.DataFrame(out_arr)
+                df = df.append(out_df)
+
+                # 추출된 이미지 저장
+                #cv2.imwrite("/NIA/frame%s.jpg" % count, image)
+                #print('Saved frame%d.jpg' % count)
+                count += 1
+
     df.to_csv('hand_keypoint.csv',header=False, index=False) # csv파일로 저장       
     vidcap.release()
