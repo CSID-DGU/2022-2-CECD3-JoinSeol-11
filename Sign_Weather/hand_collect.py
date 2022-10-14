@@ -89,15 +89,14 @@ if __name__ == "__main__":
                 out_arr = np.append(out_arr, count) #84에 frame번호
                 out_arr = np.append(out_arr, label) #85에 label번호
                 
-                #손인식 안될때 오류 수정
+                #데이터 한 줄로 만들기
                 if out_arr.size == 44:
                     out_arr = temp_peaks.reshape(1, 86)
                 if out_arr.size == 86:
                     temp_peaks = out_arr
                     out_arr = out_arr.reshape(1, 86)
                     
-                #데이터 한 줄로 만들고 dataframe 생성
-                out_arr = out_arr.reshape(1,86)
+                #dataframe 생성
                 out_df = pd.DataFrame(out_arr)
                 df = df.append(out_df)
 
