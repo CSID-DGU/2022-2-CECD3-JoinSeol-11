@@ -64,6 +64,7 @@ if __name__ == "__main__":
         vidcap = cv2.VideoCapture(base_path + '/' + classPath + '/' + vid)
         label = int(classPath) #Label명 가져오기
         count = 0
+        temp_peaks = np.array([]) #이전 frame의 keypoint
         print('Video: ' + vid)
 
         while(vidcap.isOpened()):
@@ -88,6 +89,13 @@ if __name__ == "__main__":
                 out_arr = np.append(out_arr, count) #84에 frame번호
                 out_arr = np.append(out_arr, label) #85에 label번호
                 
+                #손인식 안될때 오류 수정
+                if out_arr.size == 44:
+                    out_arr = temp_peaks.reshape(1, 86)
+                if out_arr.size == 86:
+                    temp_peaks = out_arr
+                    out_arr = out_arr.reshape(1, 86)
+                    
                 #데이터 한 줄로 만들고 dataframe 생성
                 out_arr = out_arr.reshape(1,86)
                 out_df = pd.DataFrame(out_arr)
