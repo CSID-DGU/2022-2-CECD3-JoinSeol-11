@@ -7,4 +7,5 @@
 2019112113 임가은 \
 2019112013 조건형
 
-# 
+## 개발 환경 및 오픈소스
+* [pytorch-openpose](https://github.com/Hzzone/pytorch-openpose)
