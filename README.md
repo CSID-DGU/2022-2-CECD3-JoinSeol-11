@@ -9,3 +9,6 @@
 
 ## 개발 환경 및 오픈소스
 * [pytorch-openpose](https://github.com/Hzzone/pytorch-openpose)
+* tensorflow
+* pytorch
+* opencv
