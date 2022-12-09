@@ -7,11 +7,12 @@
 2019112113 임가은 \
 2019112013 조건형
 
-## 개발 환경 및 오픈소스
+## 개발 환경
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
 <img src="https://img.shields.io/badge/Pytorch-EE4C2C?style=for-the-badge&logo=PyTorch&logoColor=white">
 <img src="https://img.shields.io/badge/Tensorflow-FF6F00?style=for-the-badge&logo=Tensorflow&logoColor=white">
 <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=Keras&logoColor=white">
 <img src="https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=Google Colab&logoColor=white">
 
+## 오픈소스
 [pytorch-openpose](https://github.com/Hzzone/pytorch-openpose)
