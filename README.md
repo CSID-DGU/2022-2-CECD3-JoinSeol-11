@@ -9,6 +9,4 @@
 
 ## 개발 환경 및 오픈소스
 * [pytorch-openpose](https://github.com/Hzzone/pytorch-openpose)
-* tensorflow
-* pytorch
-* opencv
+* <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
